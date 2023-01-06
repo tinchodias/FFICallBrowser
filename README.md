@@ -1,10 +1,10 @@
 # FFICallBrowser
 
-A tool and model to query FFI calls from Pharo.
+A tool to query FFI calls from Pharo.
 
 It is centered on the analyzer, that detects all message sends of `ffiCall:`, `ffiCall:module:` and similar, and detects the function name from the arguments.
 
-It uses SystemNavigator and AST.
+It uses `SystemNavigation` and `AST`.
 
 
 ## Installation
