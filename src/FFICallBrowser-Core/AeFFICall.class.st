@@ -1,8 +1,5 @@
 "
-I represent a method that has been determined to perform a FFI call.
-
-I hold the function name and the FFI calling selector that serves as evidence.
-Send `#isValid` to myself to know if such evidence is right.
+I represent a FFI call candidate. Only when I answer true to `#isValid`, it means that I did find a FFI function name, and I can be considered a FFI call.
 "
 Class {
 	#name : #AeFFICall,
