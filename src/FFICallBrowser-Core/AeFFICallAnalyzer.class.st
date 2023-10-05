@@ -1,13 +1,13 @@
+"
+I query all FFI calls from Pharo that satisfy certain criteria.
+"
 Class {
 	#name : #AeFFICallAnalyzer,
 	#superclass : #Object,
 	#instVars : [
-		'analysis',
 		'ffiCallingSelectors',
 		'ffiCalls',
-		'methodSelectionBlock',
-		'sortBlock',
-		'referenceFinderBlock'
+		'methodSelectionBlock'
 	],
 	#category : #'FFICallBrowser-Core'
 }
@@ -24,10 +24,7 @@ AeFFICallAnalyzer class >> example [
 AeFFICallAnalyzer >> candidateCallsDo: aBlock [
 
 	self ffiCallingSelectors do: [ :eachFFICallingSelector |
-		| references |
-		references := referenceFinderBlock value: eachFFICallingSelector.
-
-		references do: [ :eachMethod |
+		(self sendersTo: eachFFICallingSelector) do: [ :eachMethod |
 			aBlock
 				value: eachMethod
 				value: eachFFICallingSelector ] ]
@@ -56,15 +53,11 @@ AeFFICallAnalyzer >> initialize [
 
 	super initialize.
 	
-	referenceFinderBlock := [ :aSymbol |
-		SystemNavigation default allReferencesTo: aSymbol
-"		SystemNavigation default allMethodsSelect: [ :each |
-			each sendsSelector: aSymbol ] "].
 	methodSelectionBlock := [ :aCompiledMethod | true ].
 	ffiCallingSelectors := #(
 		#'ffiCall:'
 		#'ffiCall:module:'
-		#'ffiCall:options:' ).
+		#'ffiCall:options:' )
 ]
 
 { #category : #accessing }
@@ -85,18 +78,6 @@ AeFFICallAnalyzer >> newAnalysis [
 	^ AeFFICallAnalysis newWithAll: ffiCalls
 ]
 
-{ #category : #accessing }
-AeFFICallAnalyzer >> referenceFinderBlock [
-
-	^ referenceFinderBlock
-]
-
-{ #category : #accessing }
-AeFFICallAnalyzer >> referenceFinderBlock: anObject [
-
-	referenceFinderBlock := anObject
-]
-
 { #category : #analysis }
 AeFFICallAnalyzer >> run [
 
@@ -111,4 +92,10 @@ AeFFICallAnalyzer >> run [
 		(aCallCandidate isValid and: [
 		methodSelectionBlock value: aCallCandidate ])
 			ifTrue: [ ffiCalls add: aCallCandidate ] ]
+]
+
+{ #category : #private }
+AeFFICallAnalyzer >> sendersTo: aSelector [
+
+	^ SystemNavigation default allReferencesTo: aSelector
 ]

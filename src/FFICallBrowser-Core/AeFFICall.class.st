@@ -1,3 +1,9 @@
+"
+I represent a method that has been determined to perform a FFI call.
+
+I hold the function name and the FFI calling selector that serves as evidence.
+Send `#isValid` to myself to know if such evidence is currently corrovborated in the system.
+"
 Class {
 	#name : #AeFFICall,
 	#superclass : #Object,

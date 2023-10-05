@@ -1,3 +1,6 @@
+"
+I'm a result of searching FFI calls on the system, and provide a useful API for UIs.
+"
 Class {
 	#name : #AeFFICallAnalysis,
 	#superclass : #Object,
@@ -22,9 +25,9 @@ AeFFICallAnalysis >> ffiCalls [
 ]
 
 { #category : #accessing }
-AeFFICallAnalysis >> ffiCalls: anObject [
+AeFFICallAnalysis >> ffiCalls: aCollection [
 
-	ffiCalls := anObject
+	ffiCalls := aCollection
 ]
 
 { #category : #query }
