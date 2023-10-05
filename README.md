@@ -35,4 +35,4 @@ To see:
 
 <img width="712" alt="Screenshot 2023-01-05 at 22 34 44" src="https://user-images.githubusercontent.com/3044265/210911750-607bc412-0d58-4eb1-9566-e57e34b4bac9.png">
 
-The analysis implements `browse`, which you can use to search and open method in Calypso on double-click.
+The analysis implements `openBrowser`, which you can use to type and search, and open method in Calypso on double-click.
