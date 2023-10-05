@@ -76,6 +76,18 @@ AeFFICall >> method [
 	^ method
 ]
 
+{ #category : #accessing }
+AeFFICall >> packageName [
+
+	^ method package name
+]
+
+{ #category : #testing }
+AeFFICall >> packageNameBeginsWith: aString [
+
+	^ self packageName beginsWith: aString
+]
+
 { #category : #printing }
 AeFFICall >> printOn: aStream [
 
