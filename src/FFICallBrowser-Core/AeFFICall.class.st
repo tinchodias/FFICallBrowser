@@ -2,7 +2,7 @@
 I represent a method that has been determined to perform a FFI call.
 
 I hold the function name and the FFI calling selector that serves as evidence.
-Send `#isValid` to myself to know if such evidence is currently corrovborated in the system.
+Send `#isValid` to myself to know if such evidence is right.
 "
 Class {
 	#name : #AeFFICall,
@@ -25,15 +25,30 @@ AeFFICall class >> newWithMethod: aCompiledMethod ffiCallingSelector: aSymbol [
 ]
 
 { #category : #accessing }
-AeFFICall >> detectAstMessageNodeIfNone: absentBlock [
+AeFFICall >> detectASTMessageSendNodeIfNone: absentBlock [
 
 	method ast body nodesDo: [ :eachNode |
-	 (eachNode isMessage and: [
+		(eachNode isMessage and: [
 		eachNode selector = ffiCallingSelector ])
 			ifTrue: [ ^ eachNode ] ].
 
 	absentBlock value
 
+]
+
+{ #category : #initialization }
+AeFFICall >> detectFunctionName [
+
+	| astNode firstArgument |
+	astNode := self detectASTMessageSendNodeIfNone: [ ^ self ].
+
+	firstArgument := astNode arguments first.
+	firstArgument isLiteralArray ifFalse: [ ^ self ].
+
+	firstArgument value reversed readStreamDo: [:stream |
+		"Ignore function parameters enclosed by parenthesis"
+		stream next.
+		functionName := stream next asSymbol ]
 ]
 
 { #category : #accessing }
@@ -51,23 +66,12 @@ AeFFICall >> functionName [
 { #category : #initialization }
 AeFFICall >> initializeWithMethod: aCompiledMethod ffiCallingSelector: aSymbol [
 
-	| astNode firstArgument |
 	self initialize.
 	
 	method := aCompiledMethod.
 	ffiCallingSelector := aSymbol.
 
-	astNode := self detectAstMessageNodeIfNone: [ ^ self ].
-
-	firstArgument := astNode arguments first.
-	firstArgument isLiteralArray ifFalse: [ ^ self ].
-
-	firstArgument value reversed readStreamDo: [:stream |
-		"Ignore function parameters enclosed by parenthesis"
-		stream next.
-		functionName := stream next asSymbol ].
-		
-
+	self detectFunctionName
 ]
 
 { #category : #testing }
