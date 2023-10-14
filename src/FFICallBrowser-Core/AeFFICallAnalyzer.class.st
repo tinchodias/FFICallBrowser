@@ -54,10 +54,11 @@ AeFFICallAnalyzer >> initialize [
 	super initialize.
 	
 	methodSelectionBlock := [ :aCompiledMethod | true ].
-	ffiCallingSelectors := #(
-		#'ffiCall:'
-		#'ffiCall:module:'
-		#'ffiCall:options:' )
+	ffiCallingSelectors :=
+		Array streamContents: [ :stream |
+			Object selectorsDo: [ :each |
+				(each beginsWith: 'ffiCall:')
+					ifTrue: [ stream nextPut: each ] ] ]
 ]
 
 { #category : #accessing }
