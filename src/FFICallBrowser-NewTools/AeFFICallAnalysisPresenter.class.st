@@ -12,6 +12,14 @@ Class {
 	#category : #'FFICallBrowser-NewTools'
 }
 
+{ #category : #accessing }
+AeFFICallAnalysisPresenter >> analysis: anAnalysis [
+
+	analysis := anAnalysis.
+	
+	self refreshOnAnalysisUpdate
+]
+
 { #category : #layout }
 AeFFICallAnalysisPresenter >> defaultLayout [
 
@@ -30,18 +38,26 @@ AeFFICallAnalysisPresenter >> initializePresenters [
 			beNotEditable;
 			yourself.
 
-	callsTable := self newTable
+	callsTable := self newTable.
+
+	callsTable
+		alternateRowsColor;
+
 		addColumn: (SpStringTableColumn new 
 			title: 'Function Name';
 			evaluated: [ :each | each functionName ];
 			beSortable;
 			yourself);
 		addColumn: (SpStringTableColumn new  
-			title: 'FFI Method';
-			evaluated: [ :each | each method name ];
+			title: 'Method origin';
+			evaluated: [ :each | each method origin name ];
 			beSortable;
 			yourself);
-		items: analysis ffiCalls;
+		addColumn: (SpStringTableColumn new  
+			title: 'Method selector';
+			evaluated: [ :each | each method selector ];
+			beSortable;
+			yourself);
 		
 		enableSearch;
 		searchMatching: [ :each :patternString |
@@ -53,9 +69,9 @@ AeFFICallAnalysisPresenter >> initializePresenters [
 		whenSelectedDo: [ :selection |
 			sourceCode
 				beForMethod: selection method;
-				text: selection method sourceCode ];
+				text: selection method sourceCode ].
 			
-		yourself.
+	self refreshOnAnalysisUpdate
 ]
 
 { #category : #initialization }
@@ -66,8 +82,15 @@ AeFFICallAnalysisPresenter >> initializeWindow: aWindowPresenter [
 		initialExtent: 600 @ 800
 ]
 
-{ #category : #'accessing - model' }
-AeFFICallAnalysisPresenter >> setModelBeforeInitialization: anObject [
+{ #category : #accessing }
+AeFFICallAnalysisPresenter >> refreshOnAnalysisUpdate [
 
-	analysis := anObject
+	(callsTable isNil or: [ analysis isNil ])
+		ifFalse: [ callsTable items: analysis ffiCalls ]
+]
+
+{ #category : #'accessing - model' }
+AeFFICallAnalysisPresenter >> setModelBeforeInitialization: anAnalysis [
+
+	self analysis: anAnalysis
 ]
