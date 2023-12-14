@@ -12,6 +12,20 @@ Class {
 	#category : #'FFICallBrowser-NewTools'
 }
 
+{ #category : #example }
+AeFFICallAnalysisPresenter class >> openOnAllCalls [
+	<script: 'self openOnAllCalls'>
+
+	| analysis |
+	analysis := AeFFICallAnalyzer new
+		methodSelectionBlock: [ :aFFICall | true ];
+		run;
+		newAnalysis.
+	^ analysis
+		sortByFunctionName;
+		openBrowser
+]
+
 { #category : #accessing }
 AeFFICallAnalysisPresenter >> analysis: anAnalysis [
 
