@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #tests }
-FFICallAnalysisPresenterTest >> testOpenOnAllCalls [
+FFICallAnalysisPresenterTest >> testSmokeOpenOnAllCalls [
 
 	| window |
 	window := FFICallAnalysisPresenter openOnAllCalls.
