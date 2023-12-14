@@ -15,7 +15,7 @@ BaselineOfFFICallBrowser >> baseline: spec [
 				package: 'FFICallBrowser-Core';
 				package: 'FFICallBrowser-NewTools' with: [
 					spec requires: #('FFICallBrowser-Core') ];
-				package: 'FFICallBrowser-Tests' with: [
+				package: 'FFICallBrowser-Core-Tests' with: [
 					spec requires: #('FFICallBrowser-Core') ];
 				package: 'FFICallBrowser-NewTools-Tests' with: [
 					spec requires: #('FFICallBrowser-NewTools') ] ]

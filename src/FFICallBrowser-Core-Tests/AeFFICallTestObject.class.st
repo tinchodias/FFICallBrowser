@@ -4,7 +4,7 @@ I'm a stub object that implements a `ffiCall:module:` both on instance-side and 
 Class {
 	#name : #AeFFICallTestObject,
 	#superclass : #Object,
-	#category : #'FFICallBrowser-Tests'
+	#category : #'FFICallBrowser-Core-Tests'
 }
 
 { #category : #'as yet unclassified' }

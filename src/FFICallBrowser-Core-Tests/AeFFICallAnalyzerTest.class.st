@@ -4,7 +4,7 @@ An AeFFICallAnalyzerTest is a test class for testing the behavior of AeFFICallAn
 Class {
 	#name : #AeFFICallAnalyzerTest,
 	#superclass : #TestCase,
-	#category : #'FFICallBrowser-Tests'
+	#category : #'FFICallBrowser-Core-Tests'
 }
 
 { #category : #tests }
