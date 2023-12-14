@@ -1,7 +1,7 @@
-Extension { #name : #AeFFICallAnalysis }
+Extension { #name : #FFICallAnalysis }
 
 { #category : #'*FFICallBrowser-NewTools' }
-AeFFICallAnalysis >> inspectionOn: aBuilder [
+FFICallAnalysis >> inspectionOn: aBuilder [
 	<inspectorPresentationOrder: 1 title: 'FFI Calls'>
 	
 	^ aBuilder newTable
@@ -26,7 +26,7 @@ AeFFICallAnalysis >> inspectionOn: aBuilder [
 ]
 
 { #category : #'*FFICallBrowser-NewTools' }
-AeFFICallAnalysis >> openBrowser [
+FFICallAnalysis >> openBrowser [
 
-	^ (AeFFICallAnalysisPresenter on: self) open
+	^ (FFICallAnalysisPresenter on: self) open
 ]

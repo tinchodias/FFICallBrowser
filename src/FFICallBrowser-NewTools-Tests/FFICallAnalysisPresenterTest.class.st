@@ -2,15 +2,15 @@
 An AeFFICallAnalysisPresenterTest is a test class for testing the behavior of AeFFICallAnalysisPresenter
 "
 Class {
-	#name : #AeFFICallAnalysisPresenterTest,
+	#name : #FFICallAnalysisPresenterTest,
 	#superclass : #TestCase,
 	#category : #'FFICallBrowser-NewTools-Tests'
 }
 
 { #category : #tests }
-AeFFICallAnalysisPresenterTest >> testOpenOnAllCalls [
+FFICallAnalysisPresenterTest >> testOpenOnAllCalls [
 
 	| window |
-	window := AeFFICallAnalysisPresenter openOnAllCalls.
+	window := FFICallAnalysisPresenter openOnAllCalls.
 	window close
 ]

@@ -2,7 +2,7 @@
 I query all FFI calls from Pharo that satisfy certain criteria.
 "
 Class {
-	#name : #AeFFICallAnalyzer,
+	#name : #FFICallAnalyzer,
 	#superclass : #Object,
 	#instVars : [
 		'ffiCallingSelectors',
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : #examples }
-AeFFICallAnalyzer class >> example [
+FFICallAnalyzer class >> example [
 
 	(self new
 		run;
@@ -21,7 +21,7 @@ AeFFICallAnalyzer class >> example [
 ]
 
 { #category : #private }
-AeFFICallAnalyzer >> candidateCallsDo: aBlock [
+FFICallAnalyzer >> candidateCallsDo: aBlock [
 
 	self ffiCallingSelectors do: [ :eachFFICallingSelector |
 		(self sendersTo: eachFFICallingSelector) do: [ :eachMethod |
@@ -31,25 +31,25 @@ AeFFICallAnalyzer >> candidateCallsDo: aBlock [
 ]
 
 { #category : #accessing }
-AeFFICallAnalyzer >> ffiCallingSelectors [
+FFICallAnalyzer >> ffiCallingSelectors [
 
 	^ ffiCallingSelectors
 ]
 
 { #category : #accessing }
-AeFFICallAnalyzer >> ffiCallingSelectors: aCollectionOfSymbols [
+FFICallAnalyzer >> ffiCallingSelectors: aCollectionOfSymbols [
 
 	ffiCallingSelectors := aCollectionOfSymbols
 ]
 
 { #category : #analysis }
-AeFFICallAnalyzer >> ffiCalls [ 
+FFICallAnalyzer >> ffiCalls [ 
 
 	^ ffiCalls
 ]
 
 { #category : #initialization }
-AeFFICallAnalyzer >> initialize [
+FFICallAnalyzer >> initialize [
 
 	super initialize.
 	
@@ -62,32 +62,32 @@ AeFFICallAnalyzer >> initialize [
 ]
 
 { #category : #accessing }
-AeFFICallAnalyzer >> methodSelectionBlock [
+FFICallAnalyzer >> methodSelectionBlock [
 
 	^ methodSelectionBlock
 ]
 
 { #category : #accessing }
-AeFFICallAnalyzer >> methodSelectionBlock: aBlock [
+FFICallAnalyzer >> methodSelectionBlock: aBlock [
 
 	methodSelectionBlock := aBlock
 ]
 
 { #category : #analysis }
-AeFFICallAnalyzer >> newAnalysis [ 
+FFICallAnalyzer >> newAnalysis [ 
 
-	^ AeFFICallAnalysis newWithAll: ffiCalls
+	^ FFICallAnalysis newWithAll: ffiCalls
 ]
 
 { #category : #analysis }
-AeFFICallAnalyzer >> run [
+FFICallAnalyzer >> run [
 
 	ffiCalls := OrderedCollection new.
 
 	self candidateCallsDo: [ :aMethod :aSelector |
 		| aCallCandidate |
 		aCallCandidate :=
-			AeFFICall
+			FFICall
 				newWithMethod: aMethod
 				ffiCallingSelector: aSelector.
 		(aCallCandidate isValid and: [
@@ -96,7 +96,7 @@ AeFFICallAnalyzer >> run [
 ]
 
 { #category : #private }
-AeFFICallAnalyzer >> sendersTo: aSelector [
+FFICallAnalyzer >> sendersTo: aSelector [
 
 	^ SystemNavigation default allReferencesTo: aSelector
 ]

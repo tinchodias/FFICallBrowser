@@ -2,13 +2,13 @@
 I'm a stub object that implements a `ffiCall:module:` both on instance-side and class-side.
 "
 Class {
-	#name : #AeFFICallTestObject,
+	#name : #FFICallTestObject,
 	#superclass : #Object,
 	#category : #'FFICallBrowser-Core-Tests'
 }
 
 { #category : #'as yet unclassified' }
-AeFFICallTestObject class >> fakeStr: aString cat: otherString [  
+FFICallTestObject class >> fakeStr: aString cat: otherString [  
 	^ self 
 		ffiCall: #( char *fake_strcat ( void *aString, void *otherString ) )
 		module: LibC
@@ -16,7 +16,7 @@ AeFFICallTestObject class >> fakeStr: aString cat: otherString [
 ]
 
 { #category : #'as yet unclassified' }
-AeFFICallTestObject >> fakeMemcpy: src to: dest size: n [
+FFICallTestObject >> fakeMemcpy: src to: dest size: n [
 	^ self 
 		ffiCall: #( void *fake_memcpy(void *dest, const void *src, size_t n) )
 		module: LibC

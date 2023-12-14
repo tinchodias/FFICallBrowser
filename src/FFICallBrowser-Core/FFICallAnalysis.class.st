@@ -2,7 +2,7 @@
 I'm a result of searching FFI calls on the system, and provide a useful API for UIs.
 "
 Class {
-	#name : #AeFFICallAnalysis,
+	#name : #FFICallAnalysis,
 	#superclass : #Object,
 	#instVars : [
 		'ffiCalls'
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-AeFFICallAnalysis class >> newWithAll: aCollectionOfFFICalls [
+FFICallAnalysis class >> newWithAll: aCollectionOfFFICalls [
 
 	^ self basicNew
 		  initializeWith: aCollectionOfFFICalls;
@@ -19,38 +19,38 @@ AeFFICallAnalysis class >> newWithAll: aCollectionOfFFICalls [
 ]
 
 { #category : #accessing }
-AeFFICallAnalysis >> ffiCalls [
+FFICallAnalysis >> ffiCalls [
 
 	^ ffiCalls
 ]
 
 { #category : #accessing }
-AeFFICallAnalysis >> ffiCalls: aCollection [
+FFICallAnalysis >> ffiCalls: aCollection [
 
 	ffiCalls := aCollection
 ]
 
 { #category : #query }
-AeFFICallAnalysis >> ffiCallsByFunctionName [
+FFICallAnalysis >> ffiCallsByFunctionName [
 	
 	^ ffiCalls groupedBy: [ :each | each functionName ]
 ]
 
 { #category : #query }
-AeFFICallAnalysis >> functionNames [
+FFICallAnalysis >> functionNames [
 	
 	^ ffiCalls collect: [ :each | each functionName ] as: Set
 ]
 
 { #category : #initialization }
-AeFFICallAnalysis >> initializeWith: aCollectionOfFFICalls [
+FFICallAnalysis >> initializeWith: aCollectionOfFFICalls [
 
 	self initialize.
 	ffiCalls := aCollectionOfFFICalls
 ]
 
 { #category : #sorting }
-AeFFICallAnalysis >> sortByFunctionName [
+FFICallAnalysis >> sortByFunctionName [
 
 	ffiCalls sort: [ :x :y | x functionName < y functionName ]
 

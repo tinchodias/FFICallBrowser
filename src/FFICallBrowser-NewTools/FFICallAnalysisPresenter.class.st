@@ -2,7 +2,7 @@
 I'm a Spec presenter for `AeFFICallAnalysis`.
 "
 Class {
-	#name : #AeFFICallAnalysisPresenter,
+	#name : #FFICallAnalysisPresenter,
 	#superclass : #SpPresenter,
 	#instVars : [
 		'analysis',
@@ -13,11 +13,11 @@ Class {
 }
 
 { #category : #example }
-AeFFICallAnalysisPresenter class >> openOnAllCalls [
+FFICallAnalysisPresenter class >> openOnAllCalls [
 	<script: 'self openOnAllCalls'>
 
 	| analysis |
-	analysis := AeFFICallAnalyzer new
+	analysis := FFICallAnalyzer new
 		methodSelectionBlock: [ :aFFICall | true ];
 		run;
 		newAnalysis.
@@ -27,7 +27,7 @@ AeFFICallAnalysisPresenter class >> openOnAllCalls [
 ]
 
 { #category : #accessing }
-AeFFICallAnalysisPresenter >> analysis: anAnalysis [
+FFICallAnalysisPresenter >> analysis: anAnalysis [
 
 	analysis := anAnalysis.
 	
@@ -35,7 +35,7 @@ AeFFICallAnalysisPresenter >> analysis: anAnalysis [
 ]
 
 { #category : #layout }
-AeFFICallAnalysisPresenter >> defaultLayout [
+FFICallAnalysisPresenter >> defaultLayout [
 
 	^ SpPanedLayout newTopToBottom
 		add: #callsTable;
@@ -45,7 +45,7 @@ AeFFICallAnalysisPresenter >> defaultLayout [
 ]
 
 { #category : #initialization }
-AeFFICallAnalysisPresenter >> initializePresenters [
+FFICallAnalysisPresenter >> initializePresenters [
 
 	sourceCode :=
 		self newCode
@@ -89,7 +89,7 @@ AeFFICallAnalysisPresenter >> initializePresenters [
 ]
 
 { #category : #initialization }
-AeFFICallAnalysisPresenter >> initializeWindow: aWindowPresenter [
+FFICallAnalysisPresenter >> initializeWindow: aWindowPresenter [
 
 	aWindowPresenter
 		title: 'FFI Call Browser';
@@ -97,14 +97,14 @@ AeFFICallAnalysisPresenter >> initializeWindow: aWindowPresenter [
 ]
 
 { #category : #accessing }
-AeFFICallAnalysisPresenter >> refreshOnAnalysisUpdate [
+FFICallAnalysisPresenter >> refreshOnAnalysisUpdate [
 
 	(callsTable isNil or: [ analysis isNil ])
 		ifFalse: [ callsTable items: analysis ffiCalls ]
 ]
 
 { #category : #'accessing - model' }
-AeFFICallAnalysisPresenter >> setModelBeforeInitialization: anAnalysis [
+FFICallAnalysisPresenter >> setModelBeforeInitialization: anAnalysis [
 
 	self analysis: anAnalysis
 ]

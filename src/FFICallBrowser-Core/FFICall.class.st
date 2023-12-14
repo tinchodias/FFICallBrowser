@@ -2,7 +2,7 @@
 I represent a FFI call candidate. Only when I answer true to `#isValid`, it means that I did find a FFI function name, and I can be considered a FFI call.
 "
 Class {
-	#name : #AeFFICall,
+	#name : #FFICall,
 	#superclass : #Object,
 	#instVars : [
 		'method',
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-AeFFICall class >> newWithMethod: aCompiledMethod ffiCallingSelector: aSymbol [
+FFICall class >> newWithMethod: aCompiledMethod ffiCallingSelector: aSymbol [
 
 	^ self basicNew
 		initializeWithMethod: aCompiledMethod
@@ -22,7 +22,7 @@ AeFFICall class >> newWithMethod: aCompiledMethod ffiCallingSelector: aSymbol [
 ]
 
 { #category : #accessing }
-AeFFICall >> detectASTMessageSendNodeIfNone: absentBlock [
+FFICall >> detectASTMessageSendNodeIfNone: absentBlock [
 
 	method ast body nodesDo: [ :eachNode |
 		(eachNode isMessage and: [
@@ -34,7 +34,7 @@ AeFFICall >> detectASTMessageSendNodeIfNone: absentBlock [
 ]
 
 { #category : #initialization }
-AeFFICall >> detectFunctionName [
+FFICall >> detectFunctionName [
 
 	| astNode firstArgument |
 	astNode := self detectASTMessageSendNodeIfNone: [ ^ self ].
@@ -49,19 +49,19 @@ AeFFICall >> detectFunctionName [
 ]
 
 { #category : #accessing }
-AeFFICall >> ffiCallingSelector [
+FFICall >> ffiCallingSelector [
 
 	^ ffiCallingSelector
 ]
 
 { #category : #accessing }
-AeFFICall >> functionName [
+FFICall >> functionName [
 
 	^ functionName
 ]
 
 { #category : #initialization }
-AeFFICall >> initializeWithMethod: aCompiledMethod ffiCallingSelector: aSymbol [
+FFICall >> initializeWithMethod: aCompiledMethod ffiCallingSelector: aSymbol [
 
 	self initialize.
 	
@@ -72,31 +72,31 @@ AeFFICall >> initializeWithMethod: aCompiledMethod ffiCallingSelector: aSymbol [
 ]
 
 { #category : #testing }
-AeFFICall >> isValid [
+FFICall >> isValid [
 
 	^ functionName notNil
 ]
 
 { #category : #accessing }
-AeFFICall >> method [
+FFICall >> method [
 
 	^ method
 ]
 
 { #category : #accessing }
-AeFFICall >> packageName [
+FFICall >> packageName [
 
 	^ method package name
 ]
 
 { #category : #testing }
-AeFFICall >> packageNameBeginsWith: aString [
+FFICall >> packageNameBeginsWith: aString [
 
 	^ self packageName beginsWith: aString
 ]
 
 { #category : #printing }
-AeFFICall >> printOn: aStream [
+FFICall >> printOn: aStream [
 
 	super printOn: aStream.
 	aStream
