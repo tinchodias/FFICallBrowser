@@ -1,0 +1,9 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'FFICallBrowser',
+      #directory : 'src',
+      #platforms : [ #pharo ]
+    }
+  ]
+}
