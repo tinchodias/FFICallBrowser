@@ -4,7 +4,7 @@ Class {
 	#category : #BaselineOfFFICallBrowser
 }
 
-{ #category : #baseline }
+{ #category : #baselines }
 BaselineOfFFICallBrowser >> baseline: spec [
 	<baseline>
 
@@ -13,6 +13,10 @@ BaselineOfFFICallBrowser >> baseline: spec [
 		do: [ 
 			spec
 				package: 'FFICallBrowser-Core';
-				package: 'FFICallBrowser-NewTools' with: [ spec requires: #('FFICallBrowser-Core') ];
-				package: 'FFICallBrowser-Tests' with: [ spec requires: #('FFICallBrowser-Core') ] ]
+				package: 'FFICallBrowser-NewTools' with: [
+					spec requires: #('FFICallBrowser-Core') ];
+				package: 'FFICallBrowser-Tests' with: [
+					spec requires: #('FFICallBrowser-Core') ];
+				package: 'FFICallBrowser-NewTools-Tests' with: [
+					spec requires: #('FFICallBrowser-NewTools') ] ]
 ]
