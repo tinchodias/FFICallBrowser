@@ -34,6 +34,18 @@ FFICallAnalysisPresenter >> analysis: anAnalysis [
 	self refreshOnAnalysisUpdate
 ]
 
+{ #category : #initialization }
+FFICallAnalysisPresenter >> browseSelectedFFICall [
+
+	callsTable selectedItem method browse
+]
+
+{ #category : #initialization }
+FFICallAnalysisPresenter >> browseSendersOfSelectedFFICall [
+
+	SystemNavigation default browseAllSendersOf: callsTable selectedItem method selector
+]
+
 { #category : #layout }
 FFICallAnalysisPresenter >> defaultLayout [
 
@@ -83,8 +95,13 @@ FFICallAnalysisPresenter >> initializePresenters [
 		whenSelectedDo: [ :selection |
 			sourceCode
 				beForMethod: selection method;
-				text: selection method sourceCode ].
-			
+				text: selection method sourceCode ];
+
+		bindKeyCombination: $b meta
+			toAction: [ self browseSelectedFFICall ];
+		bindKeyCombination: $n meta
+			toAction: [ self browseSendersOfSelectedFFICall ].
+
 	self refreshOnAnalysisUpdate
 ]
 
